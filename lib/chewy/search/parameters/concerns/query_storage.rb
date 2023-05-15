@@ -1,4 +1,5 @@
-require 'elasticsearch/dsl'
+require 'opensearch-ruby'
+require 'opensearch-dsl'
 
 module Chewy
   module Search
@@ -94,7 +95,7 @@ module Chewy
           def normalize(queries)
             Array.wrap(queries).map do |query|
               if query.is_a?(Proc)
-                Elasticsearch::DSL::Search::Query.new(&query).to_hash
+                OpenSearch::DSL::Search::Query.new(&query).to_hash
               else
                 query
               end

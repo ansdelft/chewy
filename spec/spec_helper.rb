@@ -15,6 +15,7 @@ require 'support/fail_helpers'
 require 'support/class_helpers'
 
 require 'chewy/rspec'
+require 'opensearch-ruby'
 
 host = ENV['ES_HOST'] || 'localhost'
 port = ENV['ES_PORT'] || 9200

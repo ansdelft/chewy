@@ -45,12 +45,12 @@ if defined?(Sidekiq)
       it 'does schedule a job that triggers reindex with default options' do
         Timecop.freeze do
           expect(Sidekiq::Client).to receive(:push).with(
-            hash_including(
+            {
               'queue' => 'chewy',
               'at' => (Time.current.to_i.ceil(-1) + 2.seconds).to_i,
               'class' => Chewy::Strategy::DelayedSidekiq::Worker,
               'args' => ['CitiesIndex', an_instance_of(Integer)]
-            )
+            }
           ).and_call_original
 
           expect($stdout).not_to receive(:puts)

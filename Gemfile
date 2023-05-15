@@ -16,6 +16,7 @@ gem 'guard'
 gem 'guard-rspec'
 
 gem 'opensearch-ruby'
+gem 'opensearch-dsl'
 
 gem 'redcarpet'
 gem 'yard'
