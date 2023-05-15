@@ -32,7 +32,7 @@ module Chewy
         #
         def create(*args, **kwargs)
           create!(*args, **kwargs)
-        rescue Elasticsearch::Transport::Transport::Errors::BadRequest
+        rescue OpenSearch::Transport::Transport::Errors::BadRequest
           false
         end
 
@@ -85,7 +85,7 @@ module Chewy
           result
           # es-ruby >= 1.0.10 handles Elasticsearch::Transport::Transport::Errors::NotFound
           # by itself, rescue is for previous versions
-        rescue Elasticsearch::Transport::Transport::Errors::NotFound
+        rescue OpenSearch::Transport::Transport::Errors::NotFound
           false
         end
 
@@ -101,7 +101,7 @@ module Chewy
         def delete!(suffix = nil)
           # es-ruby >= 1.0.10 handles Elasticsearch::Transport::Transport::Errors::NotFound
           # by itself, so it is raised here
-          delete(suffix) or raise Elasticsearch::Transport::Transport::Errors::NotFound
+          delete(suffix) or raise OpenSearch::Transport::Transport::Errors::NotFound
         end
 
         # Deletes and recreates index. Supports suffixes.

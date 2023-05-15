@@ -17,7 +17,7 @@ require 'support/class_helpers'
 require 'chewy/rspec'
 
 host = ENV['ES_HOST'] || 'localhost'
-port = ENV['ES_PORT'] || 9250
+port = ENV['ES_PORT'] || 9200
 
 Chewy.settings = {
   host: "#{host}:#{port}",

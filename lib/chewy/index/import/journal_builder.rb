@@ -30,7 +30,7 @@ module Chewy
           {
             index_name: @index.derivable_name,
             action: action,
-            references: identify(objects).map { |item| Base64.encode64(::Elasticsearch::API.serializer.dump(item)) },
+            references: identify(objects).map { |item| Base64.encode64(::OpenSearch::API.serializer.dump(item)) },
             created_at: Time.now.utc
           }
         end

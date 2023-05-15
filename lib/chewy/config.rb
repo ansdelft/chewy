@@ -64,12 +64,12 @@ module Chewy
     end
 
     def transport_logger=(logger)
-      Chewy.client.transport.logger = logger
+      Chewy.client.transport.transport.logger = logger
       @transport_logger = logger
     end
 
     def transport_tracer=(tracer)
-      Chewy.client.transport.tracer = tracer
+      Chewy.client.transport.transport.tracer = tracer
       @transport_tracer = tracer
     end
 

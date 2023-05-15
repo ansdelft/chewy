@@ -53,7 +53,7 @@ module Chewy
 
         def request_bodies(body)
           if @bulk_size
-            serializer = ::Elasticsearch::API.serializer
+            serializer = ::OpenSearch::API.serializer
             pieces = body.each_with_object(['']) do |piece, result|
               operation, meta = piece.to_a.first
               data = meta.delete(:data)
