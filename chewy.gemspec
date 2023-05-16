@@ -31,5 +31,6 @@ Gem::Specification.new do |spec| # rubocop:disable Metrics/BlockLength
   spec.add_development_dependency 'unparser'
 
   spec.add_dependency 'activesupport', '>= 5.2'
+  spec.add_dependency 'opensearch-dsl', '>= 0.2.1'
   spec.add_dependency 'opensearch-ruby', '>= 2.1.0'
 end
