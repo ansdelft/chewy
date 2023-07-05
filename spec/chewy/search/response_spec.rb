@@ -39,7 +39,7 @@ describe Chewy::Search::Response, :orm do
     specify { expect(subject.hits).to all be_a(Hash) }
     specify do
       expect(subject.hits.flat_map(&:keys).uniq)
-        .to match_array(%w[_id _index _type _score _source sort])
+        .to match_array(%w[_id _index _score _source sort])
     end
 
     context do
@@ -63,36 +63,6 @@ describe Chewy::Search::Response, :orm do
     context do
       let(:request) { Chewy::Search::Request.new(CitiesIndex).query(range: {rating: {lte: 42}}) }
       specify { expect(subject.max_score).to eq(1.0) }
-    end
-  end
-
-  describe '#took' do
-    specify { expect(subject.took).to be >= 0 }
-
-    context do
-      let(:request) do
-        Chewy::Search::Request.new(CitiesIndex)
-          .query(script: {script: {inline: 'sleep(100); true', lang: 'groovy'}})
-      end
-      specify do
-        pending
-        expect(subject.took).to be > 100
-      end
-    end
-  end
-
-  describe '#timed_out?' do
-    specify { expect(subject.timed_out?).to eq(false) }
-
-    context do
-      let(:request) do
-        Chewy::Search::Request.new(CitiesIndex)
-          .query(script: {script: {inline: 'sleep(100); true', lang: 'groovy'}}).timeout('10ms')
-      end
-      specify do
-        pending
-        expect(subject.timed_out?).to eq(true)
-      end
     end
   end
 

@@ -15,9 +15,10 @@ require 'support/fail_helpers'
 require 'support/class_helpers'
 
 require 'chewy/rspec'
+require 'opensearch-ruby'
 
 host = ENV['ES_HOST'] || 'localhost'
-port = ENV['ES_PORT'] || 9250
+port = ENV['ES_PORT'] || 9200
 
 Chewy.settings = {
   host: "#{host}:#{port}",

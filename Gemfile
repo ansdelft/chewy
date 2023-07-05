@@ -15,6 +15,9 @@ gem 'ruby-progressbar', require: false
 gem 'guard'
 gem 'guard-rspec'
 
+gem 'opensearch-dsl'
+gem 'opensearch-ruby'
+
 gem 'redcarpet'
 gem 'yard'
 

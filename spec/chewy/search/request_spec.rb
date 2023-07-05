@@ -141,7 +141,6 @@ describe Chewy::Search::Request do
 
     context do
       let(:other_scope) { subject.filter.should { multi_match foo: 'bar' }.filter { match foo: 'bar' } }
-
       specify do
         expect(
           subject.filter.not(other_scope).render[:body]
