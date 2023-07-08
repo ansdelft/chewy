@@ -8,6 +8,16 @@
 
 ### Bugs Fixed
 
+## 7.3.3 (2023-07-07)
+
+### New Features
+
+* [#888](https://github.com/toptal/chewy/pull/888/files): Skip journal creation on import ([@konalegi](https://github.com/konalegi))
+
+### Changes
+
+### Bugs Fixed
+
 ## 7.3.2 (2023-04-20)
 
 ### New Features
