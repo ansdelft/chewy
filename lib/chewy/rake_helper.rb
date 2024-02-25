@@ -268,6 +268,24 @@ module Chewy
           end
       end
 
+      def create_missing_indexes!(output: $stdout, env: ENV)
+        subscribed_task_stats(output) do
+          Chewy.eager_load!
+          all_indexes = Chewy::Index.descendants
+          all_indexes -= [Chewy::Stash::Journal] unless Chewy.configuration[:journal]
+          all_indexes.each do |index|
+            if index.exists?
+              output.puts "#{index.name} already exists, skipping" if env['VERBOSE']
+              next
+            end
+
+            index.create!
+
+            output.puts "#{index.name} index successfully created"
+          end
+        end
+      end
+
       def normalize_indexes(*identifiers)
         identifiers.flatten(1).map { |identifier| normalize_index(identifier) }
       end
@@ -302,11 +320,7 @@ module Chewy
           all_indexes
         end
 
-        indexes = if except.present?
-          indexes - normalize_indexes(Array.wrap(except))
-        else
-          indexes
-        end
+        indexes -= normalize_indexes(Array.wrap(except)) if except.present?
 
         indexes.sort_by(&:derivable_name)
       end
@@ -329,9 +343,9 @@ module Chewy
         return if journal_exists?
 
         output.puts "############################################################\n" \
-                    "WARN: You are risking to lose some changes during the reset.\n" \
-                    "      Please consider enabling journaling.\n" \
-                    "      See https://github.com/toptal/chewy#journaling\n" \
+                    "WARN: You are risking to lose some changes during the reset.\n      " \
+                    "Please consider enabling journaling.\n      " \
+                    "See https://github.com/toptal/chewy#journaling\n" \
                     '############################################################'
       end
 

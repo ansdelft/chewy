@@ -8,6 +8,63 @@
 
 ### Bugs Fixed
 
+## 7.5.1 (2024-01-30)
+
+### New Features
+
+* [#925](https://github.com/toptal/chewy/pull/925): Add configuration option for default scope cleanup behavior. ([@barthez][])
+
+### Changes
+
+### Bugs Fixed
+
+## 7.5.0 (2024-01-15)
+
+### New Features
+
+* [#894](https://github.com/toptal/chewy/pull/894): Way of cleaning redis from artifacts left by `delayed_sidekiq` strategy which could potentially cause flaky tests. ([@Drowze](https://github.com/Drowze))
+* [#919](https://github.com/toptal/chewy/pull/919): Add pre-request filter ([@konalegi][https://github.com/konalegi])
+
+## 7.4.0 (2023-12-13)
+
+### New Features
+
+### Changes
+
+* [#911](https://github.com/toptal/chewy/pull/911): Remove ruby 2.x. ([@konalegi][https://github.com/konalegi])
+
+### Bugs Fixed
+
+## 7.3.6 (2023-12-13)
+
+### New Features
+
+* [#890](https://github.com/toptal/chewy/pull/890): Add the [`knn`](https://www.elastic.co/guide/en/elasticsearch/reference/current/knn-search.html) option to the request. ([@jkostolansky][])
+
+### Changes
+
+### Bugs Fixed
+
+## 7.3.5 (2023-12-06)
+
+### New Features
+
+* [#907](https://github.com/toptal/chewy/pull/907): Fix deprecation warning in LogSubscriber for Rails 7.1 ([@alejandroperea](https://github.com/alejandroperea))
+
+### Changes
+
+### Bugs Fixed
+
+## 7.3.4 (2023-08-29)
+
+### New Features
+
+* [#888](https://github.com/toptal/chewy/pull/892): Rake task to create missing indexes ([@konalegi](https://github.com/konalegi))
+
+### Changes
+
+### Bugs Fixed
+
 ## 7.3.3 (2023-07-07)
 
 ### New Features

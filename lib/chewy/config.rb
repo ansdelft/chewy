@@ -38,7 +38,12 @@ module Chewy
                   # for type mappings like `_all`.
                   :default_root_options,
                   # Default field type for any field in any Chewy type. Defaults to 'text'.
-                  :default_field_type
+                  :default_field_type,
+                  # Callback called on each search request to be done into ES
+                  :before_os_request_filter,
+                  # Behavior when import scope for index includes order, offset or limit.
+                  # Can be :ignore, :warn, :raise. Defaults to :warn
+                  :import_scope_cleanup_behavior
 
     attr_reader :transport_logger, :transport_tracer,
                 # Chewy search request DSL base class, used by every index.
@@ -60,6 +65,7 @@ module Chewy
       @indices_path = 'app/chewy'
       @default_root_options = {}
       @default_field_type = 'text'.freeze
+      @import_scope_cleanup_behavior = :warn
       @search_class = build_search_class(Chewy::Search::Request)
     end
 
@@ -127,17 +133,19 @@ module Chewy
   private
 
     def yaml_settings
-      @yaml_settings ||= begin
-        if defined?(Rails::VERSION)
-          file = Rails.root.join('config', 'chewy.yml')
+      @yaml_settings ||= build_yaml_settings || {}
+    end
 
-          if File.exist?(file)
-            yaml = ERB.new(File.read(file)).result
-            hash = YAML.respond_to?(:unsafe_load) ? YAML.unsafe_load(yaml) : YAML.load(yaml) # rubocop:disable Security/YAMLLoad
-            hash[Rails.env].try(:deep_symbolize_keys) if hash
-          end
-        end || {}
-      end
+    def build_yaml_settings
+      return unless defined?(Rails::VERSION)
+
+      file = Rails.root.join('config', 'chewy.yml')
+
+      return unless File.exist?(file)
+
+      yaml = ERB.new(File.read(file)).result
+      hash = YAML.unsafe_load(yaml)
+      hash[Rails.env].try(:deep_symbolize_keys) if hash
     end
 
     def build_search_class(base)

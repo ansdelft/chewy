@@ -1,7 +1,5 @@
 source 'https://rubygems.org'
 
-gemspec
-
 gem 'activerecord'
 
 gem 'activejob', require: false
@@ -21,5 +19,7 @@ gem 'opensearch-ruby'
 gem 'redcarpet'
 gem 'yard'
 
-gem 'rexml' if RUBY_VERSION >= '3.0.0'
-gem 'ruby2_keywords' if RUBY_VERSION < '2.7'
+gem 'rexml'
+
+eval_gemfile 'gemfiles/base.gemfile'
+gemspec

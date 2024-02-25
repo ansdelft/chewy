@@ -7,7 +7,7 @@ module Chewy
 
   class UndefinedUpdateStrategy < Error
     def initialize(_type)
-      super <<-MESSAGE
+      super(<<-MESSAGE)
   Index update strategy is undefined for current context.
   Please wrap your code with `Chewy.strategy(:strategy_name) block.`
       MESSAGE
@@ -27,7 +27,7 @@ module Chewy
           message << "        on #{documents.count} documents: #{documents}\n"
         end
       end
-      super message
+      super(message)
     end
   end
 
@@ -35,5 +35,8 @@ module Chewy
     def initialize(join_field_type, join_field_name, relations)
       super("`#{join_field_type}` set for the join field `#{join_field_name}` is not on the :relations list (#{relations})")
     end
+  end
+
+  class ImportScopeCleanupError < Error
   end
 end
